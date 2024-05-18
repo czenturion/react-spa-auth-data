@@ -1,18 +1,27 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import {AuthAPI, LoginFormData} from "../api/auth";
-import {useForm} from "react-hook-form";
+import * as React from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { AuthRequest, LoginFormDataT } from "../api/auth";
+import {
+  Container,
+  FormControl,
+  FormHelperText,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
+  TextField,
+  FormControlLabel,
+  Checkbox,
+  Typography,
+  Avatar,
+  Button,
+  Link,
+  Grid,
+  Box
+} from "@mui/material";
+import { Visibility, VisibilityOff, LockOutlined } from "@mui/icons-material";
+import LoginModal from "./LoginModal";
 
 
 export default function SignIn() {
@@ -22,18 +31,29 @@ export default function SignIn() {
     formState: {errors},
     setError,
     clearErrors
-  } = useForm<LoginFormData>();
+  } = useForm<LoginFormDataT>();
+  const [showPassword, setShowPassword] = React.useState(false);
+  const navigate = useNavigate();
 
-  const onSubmit = (formData: LoginFormData) => {
-    AuthAPI.auth(formData, setError).then(res => console.log(res))
-    console.log(formData);
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
   };
 
-  console.log(errors);
+  const onSubmit = (formData: LoginFormDataT) => {
+    AuthRequest(formData, setError)
+      .then(res => {
+        if (res) {
+          localStorage.setItem('token', res.token);
+          navigate('/');
+        }
+      })
+      .catch(er => console.log(er))
+  };
 
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline/>
       <Box
         sx={{
           marginTop: 8,
@@ -43,39 +63,51 @@ export default function SignIn() {
         }}
       >
         <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
-          <LockOutlinedIcon/>
+          <LockOutlined/>
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Войти
         </Typography>
         <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate sx={{mt: 1}}>
           <TextField
-            {...register("username", {required: true, onChange: clearErrors})}
+            {...register("username", {required: true})}
+            error={!!errors.authFailed?.message}
             margin="normal"
             required
             fullWidth
             id="username"
-            label="Username"
+            label="Логин"
             name="username"
             autoComplete="username"
             autoFocus
-            error={!!errors}
+            onChange={() => clearErrors('authFailed')}
           />
-          <TextField
-            {...register("password", {required: true, onChange: clearErrors})}
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            error={!!errors}
-          />
+          <FormControl error={!!errors.authFailed?.message} variant="outlined" fullWidth margin="normal">
+            <InputLabel htmlFor="outlined-adornment-password">Пароль *</InputLabel>
+            <OutlinedInput
+              {...register("password", {required: true})}
+              id="outlined-adornment-password"
+              label="Password *"
+              type={showPassword ? 'text' : 'password'}
+              onChange={() => clearErrors('authFailed')}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <VisibilityOff/> : <Visibility/>}
+                  </IconButton>
+                </InputAdornment>
+              }
+            />
+            <FormHelperText id="component-error-text">{errors.authFailed?.message}</FormHelperText>
+          </FormControl>
           <FormControlLabel
             control={<Checkbox value="remember" color="primary"/>}
-            label="Remember me"
+            label="Запомнить"
           />
           <Button
             type="submit"
@@ -83,22 +115,23 @@ export default function SignIn() {
             variant="contained"
             sx={{mt: 3, mb: 2}}
           >
-            Sign In
+            Принять
           </Button>
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">
-                Forgot password?
+                Забыли пароль?
               </Link>
             </Grid>
-            <Grid item>
+            <Grid item xs>
               <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
+                Еще не зарегистрированы? Создать аккаунт
               </Link>
             </Grid>
           </Grid>
         </Box>
       </Box>
+      <LoginModal />
     </Container>
   );
 }

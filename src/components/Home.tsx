@@ -1,14 +1,12 @@
-import Button from "@mui/material/Button";
-import { useNavigate } from "react-router-dom";
-import Container from "@mui/material/Container";
+import { withAuthRedirect } from "../hoc/withAuthRedirect";
+import { Container } from "@mui/material";
 
-export default function Home() {
-  const navigate = useNavigate()
-
+const Home = () => {
   return (
-    <Container maxWidth="md">
+    <Container>
       <div>Hello World</div>
-      <Button onClick={() => navigate('signin')} variant="outlined">Outlined</Button>
     </Container>
   )
 }
+
+export default withAuthRedirect(Home);
