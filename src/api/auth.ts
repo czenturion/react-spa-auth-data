@@ -18,7 +18,6 @@ type authResponseDataT = simpleResponseObjectT & {
   data: { token: string }
 }
 
-// 2004: deny,
 
 export const AuthAPI = {
   auth: (loginData: LoginFormDataT) => {

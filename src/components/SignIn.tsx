@@ -22,6 +22,8 @@ import {
 } from "@mui/material";
 import { Visibility, VisibilityOff, LockOutlined } from "@mui/icons-material";
 import LoginModal from "./LoginModal";
+import { setToken } from "../store/authSlice";
+import { useDispatch } from "react-redux";
 
 
 export default function SignIn() {
@@ -33,6 +35,7 @@ export default function SignIn() {
     clearErrors
   } = useForm<LoginFormDataT>();
   const [showPassword, setShowPassword] = React.useState(false);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -45,7 +48,7 @@ export default function SignIn() {
     AuthRequest(formData, setError)
       .then(res => {
         if (res) {
-          localStorage.setItem('token', res.token);
+          dispatch(setToken(res.token));
           navigate('/');
         }
       })
@@ -123,7 +126,7 @@ export default function SignIn() {
                 Забыли пароль?
               </Link>
             </Grid>
-            <Grid item xs>
+            <Grid item xs textAlign="right">
               <Link href="#" variant="body2">
                 Еще не зарегистрированы? Создать аккаунт
               </Link>
