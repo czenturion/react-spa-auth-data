@@ -23,6 +23,29 @@ export const dataSlice = createSlice({
     setEmployees(state, action) {
       state.employees = action.payload;
     },
+    addEmployee(state, action) {
+      if (state.employees !== null) {
+        state.employees = [...state.employees, action.payload.data]
+      } else {
+        state.employees = action.payload.data;
+      }
+    },
+    modifyEmployee(state, action) {
+      if (state.employees !== null) {
+        state.employees = state.employees.map(emp => {
+          if (emp.id === action.payload.id) {
+            return action.payload;
+          } else {
+            return emp;
+          }
+        })
+      }
+    },
+    deleteEmployee(state, action) {
+      if (state.employees) {
+        state.employees = state.employees.filter(emp => emp.id !== action.payload);
+      }
+    },
     removeEmployees(state) {
       state.employees = null;
     }
@@ -32,7 +55,10 @@ export const dataSlice = createSlice({
 
 export const {
   setEmployees,
-  removeEmployees
+  addEmployee,
+  deleteEmployee,
+  modifyEmployee,
+  removeEmployees,
 } = dataSlice.actions;
 
 export default dataSlice.reducer;

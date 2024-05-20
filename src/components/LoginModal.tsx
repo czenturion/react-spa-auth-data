@@ -9,9 +9,18 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: 400,
   bgcolor: 'background.paper',
-  border: '1px solid #000',
+  border: 'none',
+  borderRadius: 1,
   boxShadow: 24,
   p: 4,
+  '&:active': {
+    border: 'none',
+    outline: 'none',
+  },
+  '&:focus': {
+    border: 'none',
+    outline: 'none',
+  }
 };
 
 const LoginModal = () => {

@@ -1,9 +1,9 @@
 import axios from "axios";
+import { APIUrl } from "../consts/consts";
 
-const HOST: string = 'https://test.v5.pryaniky.com';
 
 export const instance = axios.create({
-  baseURL: HOST,
+  baseURL: APIUrl.HOST,
   headers: {
     'Content-Type': 'application/json',
   },
