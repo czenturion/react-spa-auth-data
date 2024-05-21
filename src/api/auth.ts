@@ -31,7 +31,11 @@ export const AuthAPI = {
 export const AuthRequest = async (loginData: LoginFormDataT, setError: UseFormSetError<LoginFormDataT>, dispatch: Dispatch) => {
   try {
     dispatch(isLoading(true));
-    const res = await AuthAPI.auth(loginData);
+    const encodedData = {
+      username: encodeURI(loginData.username),
+      password: encodeURI(loginData.password)
+    }
+    const res = await AuthAPI.auth(encodedData);
 
     if (res.error_code === 0) {
       return res.data;

@@ -25,7 +25,6 @@ import { setToken } from "../store/authSlice";
 import {useDispatch, useSelector} from "react-redux";
 import { RootState } from "../store/store";
 import CircularLoader from "./CircularLoader";
-import { ALPHA_NUMERIC_DASH_REGEX } from "../consts/consts";
 
 
 export default function SignIn() {
@@ -95,11 +94,6 @@ export default function SignIn() {
               autoComplete="username"
               autoFocus
               onChange={() => clearErrors('authFailed')}
-              onKeyDown={(event) => {
-                if (!ALPHA_NUMERIC_DASH_REGEX.test(event.key)) {
-                  event.preventDefault();
-                }
-              }}
             />
           </FormControl>
           <FormControl error={!!errors.authFailed?.message} variant="outlined" fullWidth margin="normal">
@@ -111,11 +105,6 @@ export default function SignIn() {
               name="password"
               type={showPassword ? 'text' : 'password'}
               onChange={() => clearErrors('authFailed')}
-              onKeyDown={(event) => {
-                if (!ALPHA_NUMERIC_DASH_REGEX.test(event.key)) {
-                  event.preventDefault();
-                }
-              }}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
