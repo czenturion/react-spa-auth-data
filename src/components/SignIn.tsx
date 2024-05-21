@@ -23,7 +23,9 @@ import {
 import { Visibility, VisibilityOff, LockOutlined } from "@mui/icons-material";
 import LoginModal from "./LoginModal";
 import { setToken } from "../store/authSlice";
-import { useDispatch } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import { RootState } from "../store/store";
+import CircularLoader from "./CircularLoader";
 
 
 export default function SignIn() {
@@ -35,8 +37,11 @@ export default function SignIn() {
     clearErrors
   } = useForm<LoginFormDataT>();
   const [showPassword, setShowPassword] = React.useState(false);
+  const [openModal, setOpen] = React.useState(true);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const loading = useSelector((state: RootState) => state.data.isLoading);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -45,7 +50,7 @@ export default function SignIn() {
   };
 
   const onSubmit = (formData: LoginFormDataT) => {
-    AuthRequest(formData, setError)
+    AuthRequest(formData, setError, dispatch)
       .then(res => {
         if (res) {
           dispatch(setToken(res.token));
@@ -54,6 +59,8 @@ export default function SignIn() {
       })
       .catch(er => console.log(er))
   };
+
+  if (loading) return <CircularLoader />
 
   return (
     <Container component="main" maxWidth="xs">
@@ -122,19 +129,19 @@ export default function SignIn() {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              <Link variant="body2">
                 Забыли пароль?
               </Link>
             </Grid>
             <Grid item xs textAlign="right">
-              <Link href="#" variant="body2">
+              <Link variant="body2">
                 Еще не зарегистрированы? Создать аккаунт
               </Link>
             </Grid>
           </Grid>
         </Box>
       </Box>
-      <LoginModal />
+      <LoginModal openModal={openModal} setOpen={setOpen} />
     </Container>
   );
 }

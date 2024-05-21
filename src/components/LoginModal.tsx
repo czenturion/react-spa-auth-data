@@ -23,10 +23,8 @@ const style = {
   }
 };
 
-const LoginModal = () => {
-  const [openModal, setOpen] = React.useState(true);
+const LoginModal = ({ openModal, setOpen }: { openModal: boolean, setOpen: (val: boolean) => void }) => {
 
-  const handleOpenModal = () => setOpen(true);
   const handleCloseModal = () => setOpen(false);
 
   return (

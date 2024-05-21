@@ -11,24 +11,32 @@ import {
 } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { employeeT } from "../store/dataSlice";
+import { isEditMode, selectedEmployee, employeeT } from "../store/dataSlice";
 import { DeleteEmployee } from "../api/employee";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../store/store";
+import CircularLoader from "./CircularLoader";
 
 type propsT = {
-  employees: employeeT[] | null
+  setOpen: (val: boolean) => void
 }
 
-const DataTable: React.FC<propsT> = ({ employees }) => {
+const DataTable: React.FC<propsT> = ({ setOpen }) => {
+  const employees = useSelector((state: RootState) => state.data.employees);
+  const loading = useSelector((state: RootState) => state.data.isLoading);
   const dispatch = useDispatch();
 
   const onEdit = (emp: employeeT) => {
-
+    dispatch(selectedEmployee(emp));
+    dispatch(isEditMode(true));
+    setOpen(true);
   }
 
   const onDelete = (id: string) => {
     DeleteEmployee(id, dispatch);
   }
+
+  if (loading) return <CircularLoader/>
 
   return (
     <TableContainer component={Paper}>
@@ -65,7 +73,7 @@ const DataTable: React.FC<propsT> = ({ employees }) => {
                 <TableCell>{row.employeeSigDate}</TableCell>
                 <TableCell>{row.employeeSignatureName}</TableCell>
                 <TableCell align="center">
-                  <IconButton aria-label="delete" >
+                  <IconButton aria-label="delete" onClick={() => onEdit(row)}>
                     <EditIcon />
                   </IconButton>
                 </TableCell>
@@ -83,4 +91,4 @@ const DataTable: React.FC<propsT> = ({ employees }) => {
   )
 }
 
-export default DataTable
+export default DataTable;

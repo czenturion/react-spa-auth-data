@@ -1,11 +1,11 @@
 import React from "react";
-import { Button, Stack } from "@mui/material";
-import { removeToken } from "../store/authSlice";
 import { useDispatch } from "react-redux";
-import EmpAddModal from "./EmpAddModal";
+import { removeToken } from "../store/authSlice";
+import { isLoading, removeEmployees } from "../store/dataSlice";
+import { Button, Stack } from "@mui/material";
 
-const Toolbar = () => {
-  const [openModal, setOpen] = React.useState<boolean>(false);
+const Toolbar = ({ setOpen }: { setOpen: (val: boolean) => void }) => {
+
   const dispatch = useDispatch();
 
   const onAddEmployee = () => {
@@ -14,13 +14,14 @@ const Toolbar = () => {
 
   const onLogout = () => {
     dispatch(removeToken());
+    dispatch(removeEmployees());
+    dispatch(isLoading(false));
   }
 
   return (
     <Stack direction="row" spacing={2} margin="normal" sx={{ justifyContent: "flex-end", mt: 2, mb: 2 }}>
       <Button variant="contained" onClick={onAddEmployee}>Создать +</Button>
       <Button variant="outlined" color="warning" onClick={onLogout}>Выйти</Button>
-      <EmpAddModal openModal={openModal} setOpen={setOpen} />
     </Stack>
   )
 }

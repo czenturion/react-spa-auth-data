@@ -1,9 +1,11 @@
 import * as React from "react";
-import { Box, Button, Modal, TextField } from "@mui/material";
+import {Box, Button, Modal, TextField, Typography} from "@mui/material";
 import { useForm } from "react-hook-form";
-import { employeeT } from "../store/dataSlice";
-import { CreateEmployee } from "../api/employee";
-import { useDispatch } from "react-redux";
+import { isEditMode, selectedEmployee, employeeT } from "../store/dataSlice";
+import {CreateEmployee, ModifyEmployee} from "../api/employee";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../store/store";
+import {useEffect} from "react";
 
 const style = {
   textAlign: 'center',
@@ -31,7 +33,9 @@ const style = {
   }
 };
 
-const EmpAddModal = ({openModal, setOpen}: {openModal: boolean, setOpen: (val: boolean) => void}) => {
+const EmpModal = ({openModal, setOpen}: {openModal: boolean, setOpen: (val: boolean) => void}) => {
+  const selectedEmp = useSelector((state: RootState) => state.data.selectedEmployee);
+  const editMode = useSelector((state: RootState) => state.data.isEditMode);
   const {
     register,
     handleSubmit,
@@ -39,12 +43,32 @@ const EmpAddModal = ({openModal, setOpen}: {openModal: boolean, setOpen: (val: b
   } = useForm<employeeT>();
   const dispatch = useDispatch();
 
-  const handleCloseModal = () => setOpen(false);
+  useEffect(() => {
+    if (editMode) {
+      reset(selectedEmp)
+    } else {
+      reset({})
+    }
+  }, [selectedEmp]);
+
+
+  const handleCloseModal = () => {
+    dispatch(isEditMode(false));
+    dispatch(selectedEmployee({}));
+    setOpen(false);
+    reset({});
+  }
 
   const onSubmit = (emp: employeeT) => {
-    CreateEmployee(emp, dispatch);
-    handleCloseModal();
-    reset();
+    if (!editMode) {
+      CreateEmployee(emp, dispatch);
+      handleCloseModal();
+      reset({});
+    } else {
+      ModifyEmployee(emp, dispatch)
+      handleCloseModal();
+      reset({});
+    }
   }
 
   return (
@@ -97,17 +121,22 @@ const EmpAddModal = ({openModal, setOpen}: {openModal: boolean, setOpen: (val: b
           variant="standard"
           fullWidth
         />
+        <Typography color="gray" textAlign="left" variant="caption">* - обязательные поля</Typography>
         <Button
           variant="contained"
           type="submit"
           fullWidth
-          sx={{ mt: 2 }}
+          sx={{mt: 2}}
         >
-          Создать
+          {
+            !editMode
+              ? 'Создать'
+              : 'Изменить'
+          }
         </Button>
       </Box>
     </Modal>
   )
 }
 
-export default EmpAddModal;
+export default EmpModal;

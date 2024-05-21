@@ -14,6 +14,9 @@ export type employeeT = {
 
 const initialState = {
   employees: [] as employeeT[] | null,
+  selectedEmployee: {} as employeeT,
+  isEditMode: false as boolean,
+  isLoading: false as boolean,
 }
 
 export const dataSlice = createSlice({
@@ -46,8 +49,17 @@ export const dataSlice = createSlice({
         state.employees = state.employees.filter(emp => emp.id !== action.payload);
       }
     },
+    selectedEmployee(state, action) {
+      state.selectedEmployee = action.payload;
+    },
+    isEditMode(state, action) {
+      state.isEditMode = action.payload;
+    },
     removeEmployees(state) {
       state.employees = null;
+    },
+    isLoading(state, action) {
+      state.isLoading = action.payload;
     }
   },
 })
@@ -58,7 +70,10 @@ export const {
   addEmployee,
   deleteEmployee,
   modifyEmployee,
+  selectedEmployee,
+  isEditMode,
   removeEmployees,
+  isLoading
 } = dataSlice.actions;
 
 export default dataSlice.reducer;
