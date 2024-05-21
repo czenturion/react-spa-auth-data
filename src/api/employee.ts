@@ -28,6 +28,9 @@ export const DataRequest = (token: string | null, dispatch: Dispatch) => {
   DataAPI.getData().then(res => {
     dispatch(setEmployees(res.data));
     dispatch(isLoading(false));
+  }).catch(er => {
+    console.log(er);
+    dispatch(isLoading(false));
   });
 }
 

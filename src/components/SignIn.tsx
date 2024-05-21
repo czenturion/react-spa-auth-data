@@ -10,7 +10,6 @@ import {
   InputAdornment,
   InputLabel,
   OutlinedInput,
-  TextField,
   FormControlLabel,
   Checkbox,
   Typography,
@@ -26,6 +25,7 @@ import { setToken } from "../store/authSlice";
 import {useDispatch, useSelector} from "react-redux";
 import { RootState } from "../store/store";
 import CircularLoader from "./CircularLoader";
+import { ALPHA_NUMERIC_DASH_REGEX } from "../consts/consts";
 
 
 export default function SignIn() {
@@ -62,6 +62,12 @@ export default function SignIn() {
 
   if (loading) return <CircularLoader />
 
+  // onKeyDown={(event) => {
+  //   if (!ALPHA_NUMERIC_DASH_REGEX.test(event.key)) {
+  //     event.preventDefault();
+  //   }
+  // }}
+
   return (
     <Container component="main" maxWidth="xs">
       <Box
@@ -79,27 +85,37 @@ export default function SignIn() {
           Войти
         </Typography>
         <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate sx={{mt: 1}}>
-          <TextField
-            {...register("username", {required: true})}
-            error={!!errors.authFailed?.message}
-            margin="normal"
-            required
-            fullWidth
-            id="username"
-            label="Логин"
-            name="username"
-            autoComplete="username"
-            autoFocus
-            onChange={() => clearErrors('authFailed')}
-          />
           <FormControl error={!!errors.authFailed?.message} variant="outlined" fullWidth margin="normal">
-            <InputLabel htmlFor="outlined-adornment-password">Пароль *</InputLabel>
+            <InputLabel htmlFor="username">Логин *</InputLabel>
+            <OutlinedInput
+              {...register("username", {required: true})}
+              id="username"
+              label="Логин *"
+              name="username"
+              autoComplete="username"
+              autoFocus
+              onChange={() => clearErrors('authFailed')}
+              onKeyDown={(event) => {
+                if (!ALPHA_NUMERIC_DASH_REGEX.test(event.key)) {
+                  event.preventDefault();
+                }
+              }}
+            />
+          </FormControl>
+          <FormControl error={!!errors.authFailed?.message} variant="outlined" fullWidth margin="normal">
+            <InputLabel htmlFor="password">Пароль *</InputLabel>
             <OutlinedInput
               {...register("password", {required: true})}
-              id="outlined-adornment-password"
-              label="Password *"
+              id="password"
+              label="Пароль *"
+              name="password"
               type={showPassword ? 'text' : 'password'}
               onChange={() => clearErrors('authFailed')}
+              onKeyDown={(event) => {
+                if (!ALPHA_NUMERIC_DASH_REGEX.test(event.key)) {
+                  event.preventDefault();
+                }
+              }}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton

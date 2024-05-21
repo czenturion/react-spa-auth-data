@@ -5,3 +5,5 @@ export const APIUrl = {
   deleteEmployee: '/ru/data/v3/testmethods/docs/userdocs/delete/',
   modifyEmployee: '/ru/data/v3/testmethods/docs/userdocs/set/',
 } as const
+
+export const ALPHA_NUMERIC_DASH_REGEX = /^[a-zA-Z0-9-]+$/;

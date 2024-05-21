@@ -5,6 +5,6 @@ import { APIUrl } from "../consts/consts";
 export const instance = axios.create({
   baseURL: APIUrl.HOST,
   headers: {
-    'Content-Type': 'application/json',
+    'Content-Type': 'application/json;charset=UTF-8',
   },
 });

@@ -40,6 +40,7 @@ export const AuthRequest = async (loginData: LoginFormDataT, setError: UseFormSe
       dispatch(isLoading(false));
     }
   } catch (er) {
+    dispatch(isLoading(false));
     console.log(er);
     throw er;
   }
