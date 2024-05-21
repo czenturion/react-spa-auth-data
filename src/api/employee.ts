@@ -1,7 +1,14 @@
 import { instance } from "./api";
-import {addEmployee, deleteEmployee, setEmployees, modifyEmployee, employeeT, isLoading} from "../store/dataSlice";
+import {
+  addEmployee,
+  deleteEmployee,
+  setEmployees,
+  modifyEmployee,
+  isLoading,
+} from "../store/dataSlice";
 import { Dispatch } from "@reduxjs/toolkit";
-import { APIUrl } from "../consts/consts";
+import { APIUrl } from "../shared/consts/consts";
+import { employeeT } from "../types/types";
 
 
 export const DataAPI = {
@@ -25,20 +32,26 @@ export const DataAPI = {
 
 export const DataRequest = (token: string | null, dispatch: Dispatch) => {
   instance.defaults.headers.common['x-auth'] = token;
-  DataAPI.getData().then(res => {
-    dispatch(setEmployees(res.data));
-    dispatch(isLoading(false));
-  }).catch(er => {
-    console.log(er);
-    dispatch(isLoading(false));
-  });
+
+  DataAPI.getData()
+    .then(res => {
+      dispatch(setEmployees(res.data));
+    })
+    .catch(er => {
+      console.log(er);
+    })
+    .finally(() => {
+      dispatch(isLoading(false));
+    });
 }
 
 export const CreateEmployee = (emp: employeeT, dispatch: Dispatch) => {
   emp.companySigDate = emp.employeeSigDate = new Date().toISOString();
-  DataAPI.createEmployeeDoc(emp).then(res => {
-    dispatch(addEmployee(res));
-  })
+
+  DataAPI.createEmployeeDoc(emp)
+    .then(res => {
+      dispatch(addEmployee(res));
+    });
 }
 
 export const DeleteEmployee = (id: string, dispatch: Dispatch) => {

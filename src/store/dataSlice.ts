@@ -1,16 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-
-export type employeeT = {
-  companySigDate: string
-  companySignatureName: string
-  documentName: string
-  documentStatus: string
-  documentType: string
-  employeeNumber: string
-  employeeSigDate: string
-  employeeSignatureName: string
-  id: string
-}
+import { employeeT } from "../types/types";
 
 const initialState = {
   employees: [] as employeeT[] | null,
@@ -26,6 +15,7 @@ export const dataSlice = createSlice({
     setEmployees(state, action) {
       state.employees = action.payload;
     },
+
     addEmployee(state, action) {
       if (state.employees !== null) {
         state.employees = [...state.employees, action.payload.data]
@@ -33,6 +23,7 @@ export const dataSlice = createSlice({
         state.employees = action.payload.data;
       }
     },
+
     modifyEmployee(state, action) {
       if (state.employees !== null) {
         state.employees = state.employees.map(emp => {
@@ -44,20 +35,25 @@ export const dataSlice = createSlice({
         })
       }
     },
+
     deleteEmployee(state, action) {
       if (state.employees) {
         state.employees = state.employees.filter(emp => emp.id !== action.payload);
       }
     },
+
     selectedEmployee(state, action) {
       state.selectedEmployee = action.payload;
     },
+
     isEditMode(state, action) {
       state.isEditMode = action.payload;
     },
+
     removeEmployees(state) {
       state.employees = null;
     },
+
     isLoading(state, action) {
       state.isLoading = action.payload;
     }

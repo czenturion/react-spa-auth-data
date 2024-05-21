@@ -1,27 +1,7 @@
-import { Box, Button, Modal, Typography } from "@mui/material";
 import * as React from "react";
+import { Box, Button, Modal, Typography } from "@mui/material";
+import { loginModalStyle } from "../shared/styles/styles";
 
-const style = {
-  textAlign: 'center',
-  position: 'absolute' as 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: 'none',
-  borderRadius: 1,
-  boxShadow: 24,
-  p: 4,
-  '&:active': {
-    border: 'none',
-    outline: 'none',
-  },
-  '&:focus': {
-    border: 'none',
-    outline: 'none',
-  }
-};
 
 const LoginModal = ({ openModal, setOpen }: { openModal: boolean, setOpen: (val: boolean) => void }) => {
 
@@ -33,7 +13,7 @@ const LoginModal = ({ openModal, setOpen }: { openModal: boolean, setOpen: (val:
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box sx={style}>
+      <Box sx={loginModalStyle}>
         <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ mb: 5 }}>
           Для продолжения нужно авторизоваться
         </Typography>

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { AuthRequest, LoginFormDataT } from "../api/auth";
+import { AuthRequest } from "../api/auth";
 import {
   Container,
   FormControl,
@@ -20,14 +20,15 @@ import {
   Box
 } from "@mui/material";
 import { Visibility, VisibilityOff, LockOutlined } from "@mui/icons-material";
-import LoginModal from "./LoginModal";
 import { setToken } from "../store/authSlice";
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
+import LoginModal from "./LoginModal";
 import CircularLoader from "./CircularLoader";
+import { LoginFormDataT } from "../types/types";
 
 
-export default function SignIn() {
+const SignIn: React.FC = () => {
   const {
     register,
     handleSubmit,
@@ -38,8 +39,8 @@ export default function SignIn() {
   const [showPassword, setShowPassword] = React.useState(false);
   const [openModal, setOpen] = React.useState(true);
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const loading = useSelector((state: RootState) => state.data.isLoading);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -59,13 +60,7 @@ export default function SignIn() {
       .catch(er => console.log(er))
   };
 
-  if (loading) return <CircularLoader />
-
-  // onKeyDown={(event) => {
-  //   if (!ALPHA_NUMERIC_DASH_REGEX.test(event.key)) {
-  //     event.preventDefault();
-  //   }
-  // }}
+  if (loading) return <CircularLoader />;
 
   return (
     <Container component="main" maxWidth="xs">
@@ -150,3 +145,5 @@ export default function SignIn() {
     </Container>
   );
 }
+
+export default SignIn;

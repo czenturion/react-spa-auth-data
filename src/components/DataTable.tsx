@@ -11,11 +11,12 @@ import {
 } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { isEditMode, selectedEmployee, employeeT } from "../store/dataSlice";
-import { DeleteEmployee } from "../api/employee";
 import { useDispatch, useSelector } from "react-redux";
+import { isEditMode, selectedEmployee } from "../store/dataSlice";
+import { DeleteEmployee } from "../api/employee";
 import { RootState } from "../store/store";
 import CircularLoader from "./CircularLoader";
+import { employeeT } from "../types/types";
 
 type propsT = {
   setOpen: (val: boolean) => void
@@ -56,35 +57,37 @@ const DataTable: React.FC<propsT> = ({ setOpen }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {employees
-            ? employees.map((row) => (
-              <TableRow
-                key={row.id}
-                sx={{'&:last-child td, &:last-child th': {border: 0}}}
-              >
-                <TableCell component="th" scope="row">
-                  {row.employeeNumber}
-                </TableCell>
-                <TableCell>{row.documentName}</TableCell>
-                <TableCell>{row.documentType}</TableCell>
-                <TableCell>{row.documentStatus}</TableCell>
-                <TableCell>{row.companySigDate}</TableCell>
-                <TableCell>{row.companySignatureName}</TableCell>
-                <TableCell>{row.employeeSigDate}</TableCell>
-                <TableCell>{row.employeeSignatureName}</TableCell>
-                <TableCell align="center">
-                  <IconButton aria-label="delete" onClick={() => onEdit(row)}>
-                    <EditIcon />
-                  </IconButton>
-                </TableCell>
-                <TableCell align="center">
-                  <IconButton aria-label="delete" onClick={() => onDelete(row.id)}>
-                    <DeleteIcon />
-                  </IconButton>
-                </TableCell>
-              </TableRow>
-            ))
-            : <></>}
+          {
+            employees
+              ? employees.map((row) => (
+                <TableRow
+                  key={row.id}
+                  sx={{'&:last-child td, &:last-child th': {border: 0}}}
+                >
+                  <TableCell component="th" scope="row">
+                    {row.employeeNumber}
+                  </TableCell>
+                  <TableCell>{row.documentName}</TableCell>
+                  <TableCell>{row.documentType}</TableCell>
+                  <TableCell>{row.documentStatus}</TableCell>
+                  <TableCell>{row.companySigDate}</TableCell>
+                  <TableCell>{row.companySignatureName}</TableCell>
+                  <TableCell>{row.employeeSigDate}</TableCell>
+                  <TableCell>{row.employeeSignatureName}</TableCell>
+                  <TableCell align="center">
+                    <IconButton aria-label="delete" onClick={() => onEdit(row)}>
+                      <EditIcon />
+                    </IconButton>
+                  </TableCell>
+                  <TableCell align="center">
+                    <IconButton aria-label="delete" onClick={() => onDelete(row.id)}>
+                      <DeleteIcon />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              ))
+              : <></>
+          }
         </TableBody>
       </Table>
     </TableContainer>
