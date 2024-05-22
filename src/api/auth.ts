@@ -1,5 +1,5 @@
 import { instance } from "./api";
-import { APIUrl } from "../shared/consts/consts";
+import { APIUrl } from "../shared/consts";
 import { Dispatch } from "@reduxjs/toolkit";
 import { isLoading } from "../store/dataSlice";
 import { UseFormSetError } from "react-hook-form";
@@ -7,9 +7,9 @@ import { authResponseDataT, LoginFormDataT } from "../types/types";
 
 
 export const AuthAPI = {
-  auth: (loginData: LoginFormDataT) => {
-    return instance.post<authResponseDataT>(APIUrl.login, loginData)
-      .then(res => res.data);
+  auth: async (loginData: LoginFormDataT) => {
+    const res = await instance.post<authResponseDataT>(APIUrl.login, loginData);
+    return res.data;
   },
 }
 

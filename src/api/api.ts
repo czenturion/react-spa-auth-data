@@ -1,5 +1,5 @@
 import axios from "axios";
-import { APIUrl } from "../shared/consts/consts";
+import { APIUrl } from "../shared/consts";
 
 
 export const instance = axios.create({

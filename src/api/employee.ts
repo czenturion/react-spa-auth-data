@@ -7,7 +7,7 @@ import {
   isLoading,
 } from "../store/dataSlice";
 import { Dispatch } from "@reduxjs/toolkit";
-import { APIUrl } from "../shared/consts/consts";
+import { APIUrl } from "../shared/consts";
 import { employeeT } from "../types/types";
 
 

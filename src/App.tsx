@@ -8,7 +8,7 @@ import Copyright from "./components/Copyright";
 
 const App: React.FC = () => {
   return (
-    <Container>
+    <Container component="main">
       <CssBaseline />
       <Routes>
         <Route path="/" element={<Home />} />

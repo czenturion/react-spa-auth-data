@@ -15,7 +15,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { isEditMode, selectedEmployee } from "../store/dataSlice";
 import { DeleteEmployee } from "../api/employee";
 import { RootState } from "../store/store";
-import CircularLoader from "./CircularLoader";
 import { employeeT } from "../types/types";
 
 type propsT = {
@@ -24,7 +23,6 @@ type propsT = {
 
 const DataTable: React.FC<propsT> = ({ setOpen }) => {
   const employees = useSelector((state: RootState) => state.data.employees);
-  const loading = useSelector((state: RootState) => state.data.isLoading);
   const dispatch = useDispatch();
 
   const onEdit = (emp: employeeT) => {
@@ -36,8 +34,6 @@ const DataTable: React.FC<propsT> = ({ setOpen }) => {
   const onDelete = (id: string) => {
     DeleteEmployee(id, dispatch);
   }
-
-  if (loading) return <CircularLoader/>
 
   return (
     <TableContainer component={Paper}>

@@ -14,7 +14,7 @@ const SignIn: React.FC = () => {
   if (loading) return <CircularLoader />;
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container maxWidth="xs">
       <LoginForm />
       <LoginModal openModal={openModal} setOpen={setOpen} />
     </Container>

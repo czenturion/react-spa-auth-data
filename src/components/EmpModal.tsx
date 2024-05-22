@@ -6,7 +6,7 @@ import { CreateEmployee, ModifyEmployee } from "../api/employee";
 import { useDispatch, useSelector } from "react-redux";
 import { isEditMode, selectedEmployee } from "../store/dataSlice";
 import { RootState } from "../store/store";
-import { empModalStyle } from "../shared/styles/styles";
+import { empModalStyle } from "../shared/styles";
 import { employeeT } from "../types/types";
 
 const EmpModal = (
