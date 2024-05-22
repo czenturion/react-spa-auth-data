@@ -5,9 +5,9 @@ import { withAuthRedirect } from "../hoc/withAuthRedirect";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { Container } from "@mui/material";
-import DataTable from "./DataTable";
-import Toolbar from "./Toolbar";
-import EmpModal from "./EmpModal";
+import DataTable from "../components/DataTable";
+import Toolbar from "../components/Toolbar";
+import EmpModal from "../components/EmpModal";
 import {isLoading} from "../store/dataSlice";
 
 const Home = () => {

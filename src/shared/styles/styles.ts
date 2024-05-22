@@ -1,3 +1,8 @@
+const borderOutlineNone = {
+  border: 'none',
+  outline: 'none',
+}
+
 export const loginModalStyle = {
   textAlign: 'center',
   position: 'absolute' as 'absolute',
@@ -10,14 +15,8 @@ export const loginModalStyle = {
   borderRadius: 1,
   boxShadow: 24,
   p: 4,
-  '&:active': {
-    border: 'none',
-    outline: 'none',
-  },
-  '&:focus': {
-    border: 'none',
-    outline: 'none',
-  }
+  '&:active': borderOutlineNone,
+  '&:focus': borderOutlineNone,
 };
 
 export const empModalStyle = {
@@ -36,12 +35,6 @@ export const empModalStyle = {
   flexDirection: 'column',
   gap: 1,
   p: 4,
-  '&:active': {
-    border: 'none',
-    outline: 'none',
-  },
-  '&:focus': {
-    border: 'none',
-    outline: 'none',
-  }
+  '&:active': borderOutlineNone,
+  '&:focus': borderOutlineNone,
 };

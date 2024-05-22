@@ -6,10 +6,12 @@ import { CreateEmployee, ModifyEmployee } from "../api/employee";
 import { useDispatch, useSelector } from "react-redux";
 import { isEditMode, selectedEmployee } from "../store/dataSlice";
 import { RootState } from "../store/store";
-import { employeeT } from "../types/types";
 import { empModalStyle } from "../shared/styles/styles";
+import { employeeT } from "../types/types";
 
-const EmpModal = ({openModal, setOpen}: {openModal: boolean, setOpen: (val: boolean) => void}) => {
+const EmpModal = (
+  {openModal, setOpen}: {openModal: boolean, setOpen: (val: boolean) => void}
+) => {
   const selectedEmp = useSelector((state: RootState) => state.data.selectedEmployee);
   const editMode = useSelector((state: RootState) => state.data.isEditMode);
   const dispatch = useDispatch();
@@ -39,7 +41,7 @@ const EmpModal = ({openModal, setOpen}: {openModal: boolean, setOpen: (val: bool
     if (!editMode) {
       CreateEmployee(emp, dispatch);
     } else {
-      ModifyEmployee(emp, dispatch)
+      ModifyEmployee(emp, dispatch);
     }
     handleCloseModal();
     reset({});

@@ -2,8 +2,8 @@ import React from 'react';
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import { Container, CssBaseline } from "@mui/material";
-import Home from "./components/Home";
-import SignIn from "./components/SignIn";
+import Home from "./pages/Home";
+import SignIn from "./pages/SignIn";
 import Copyright from "./components/Copyright";
 
 const App: React.FC = () => {
