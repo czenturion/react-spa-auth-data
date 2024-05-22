@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/react-spa-auth-data/static/css/main.f855e6bc.css",
-    "main.js": "/react-spa-auth-data/static/js/main.87c638ac.js",
+    "main.js": "/react-spa-auth-data/static/js/main.efc91e54.js",
     "static/js/453.fa14a1b6.chunk.js": "/react-spa-auth-data/static/js/453.fa14a1b6.chunk.js",
     "index.html": "/react-spa-auth-data/index.html",
     "main.f855e6bc.css.map": "/react-spa-auth-data/static/css/main.f855e6bc.css.map",
-    "main.87c638ac.js.map": "/react-spa-auth-data/static/js/main.87c638ac.js.map",
+    "main.efc91e54.js.map": "/react-spa-auth-data/static/js/main.efc91e54.js.map",
     "453.fa14a1b6.chunk.js.map": "/react-spa-auth-data/static/js/453.fa14a1b6.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f855e6bc.css",
-    "static/js/main.87c638ac.js"
+    "static/js/main.efc91e54.js"
   ]
 }
