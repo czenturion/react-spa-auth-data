@@ -4,7 +4,6 @@ import { loginModalStyle } from "../shared/styles";
 
 
 const LoginModal = ({ openModal, setOpen }: { openModal: boolean, setOpen: (val: boolean) => void }) => {
-
   const handleCloseModal = () => setOpen(false);
 
   return (
