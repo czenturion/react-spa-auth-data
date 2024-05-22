@@ -1,4 +1,7 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Avatar,
   Box,
@@ -16,12 +19,11 @@ import {
   Typography
 } from "@mui/material";
 import { LockOutlined, Visibility, VisibilityOff } from "@mui/icons-material";
-import { LoginFormDataT } from "../types/types";
 import { AuthRequest } from "../api/auth";
 import { setToken } from "../store/authSlice";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { RootState } from "../store/store";
+import { LoginFormDataT } from "../types/types";
+import CircularLoader from "./CircularLoader";
 
 const LoginForm = () => {
   const {
@@ -35,6 +37,7 @@ const LoginForm = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const loading = useSelector((state: RootState) => state.data.isLoading);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -52,6 +55,8 @@ const LoginForm = () => {
       })
       .catch(er => console.log(er))
   };
+
+  if (loading) return <CircularLoader />;
 
   return (
     <Box

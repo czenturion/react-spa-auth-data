@@ -8,24 +8,23 @@ import {
 } from "../store/dataSlice";
 import { Dispatch } from "@reduxjs/toolkit";
 import { APIUrl } from "../shared/consts";
-import { employeeT } from "../types/types";
+import { dataT, employeeT, modifyEmployT, simpleResponseObjectT } from "../types/types";
 
 
 export const DataAPI = {
   getData: () => {
-    return instance.get(APIUrl.getData)
+    return instance.get<dataT>(APIUrl.getData)
       .then(res => res.data);
   },
   createEmployeeDoc: (emp: employeeT) => {
-    return instance.post(APIUrl.addEmployee, emp)
+    return instance.post<employeeT>(APIUrl.addEmployee, emp)
       .then(res => res.data);
   },
   deleteEmployeeDoc: (id: string) => {
-    return instance.post(APIUrl.deleteEmployee + id)
-      .then(res => console.log(res));
+    return instance.post<simpleResponseObjectT>(APIUrl.deleteEmployee + id);
   },
   modifyEmployeeDoc: (id: string, emp: employeeT) => {
-    return instance.post(APIUrl.modifyEmployee + id, emp)
+    return instance.post<modifyEmployT>(APIUrl.modifyEmployee + id, emp)
       .then(res => res.data);
   }
 }
