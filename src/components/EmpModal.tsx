@@ -9,6 +9,7 @@ import { RootState } from "../store/store";
 import { empModalStyle } from "../shared/styles";
 import { employeeT } from "../types/types";
 
+
 const EmpModal = (
   {openModal, setOpen}: {openModal: boolean, setOpen: (val: boolean) => void}
 ) => {
@@ -44,7 +45,6 @@ const EmpModal = (
       ModifyEmployee(emp, dispatch);
     }
     handleCloseModal();
-    reset({});
   }
 
   return (

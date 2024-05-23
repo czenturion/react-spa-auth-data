@@ -11,6 +11,7 @@ import EmpModal from "../components/EmpModal";
 import { isLoading } from "../store/dataSlice";
 import CircularLoader from "../components/CircularLoader";
 
+
 const Home: React.FC = () => {
   const dispatch = useDispatch();
   const token = useSelector((state: RootState) => state.auth.token);
