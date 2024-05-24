@@ -5,10 +5,10 @@ import {
   setEmployees,
   modifyEmployee,
   isLoading,
-} from "../store/dataSlice";
+} from "@/store/dataSlice";
 import { Dispatch } from "@reduxjs/toolkit";
-import { APIUrl } from "../shared/consts";
-import { dataT, employeeT, modifyEmployT, simpleResponseObjectT } from "../types/types";
+import { APIUrl } from "@/shared/consts";
+import { dataT, employeeT, modifyEmployT, simpleResponseObjectT } from "@/types/types";
 
 
 export const DataAPI = {

@@ -2,12 +2,12 @@ import * as React from "react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Box, Button, Modal, TextField, Typography } from "@mui/material";
-import { CreateEmployee, ModifyEmployee } from "../api/employee";
+import { CreateEmployee, ModifyEmployee } from "@/api/employee";
 import { useDispatch, useSelector } from "react-redux";
-import { isEditMode, selectedEmployee } from "../store/dataSlice";
-import { RootState } from "../store/store";
-import { empModalStyle } from "../shared/styles";
-import { employeeT } from "../types/types";
+import { isEditMode, selectedEmployee } from "@/store/dataSlice";
+import { RootState } from "@/store/store";
+import { empModalStyle } from "@/shared/styles";
+import { employeeT } from "@/types/types";
 
 
 const EmpModal = (

@@ -12,10 +12,10 @@ import {
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useDispatch, useSelector } from "react-redux";
-import { isEditMode, selectedEmployee } from "../store/dataSlice";
-import { DeleteEmployee } from "../api/employee";
-import { RootState } from "../store/store";
-import { employeeT } from "../types/types";
+import { isEditMode, selectedEmployee } from "@/store/dataSlice";
+import { DeleteEmployee } from "@/api/employee";
+import { RootState } from "@/store/store";
+import { employeeT } from "@/types/types";
 
 type propsT = {
   setOpen: (val: boolean) => void

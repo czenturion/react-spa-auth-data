@@ -1,15 +1,15 @@
 import React from "react";
 import { useEffect } from "react";
-import { DataRequest } from "../api/employee";
-import { withAuthRedirect } from "../hoc/withAuthRedirect";
+import { DataRequest } from "@/api/employee";
+import { withAuthRedirect } from "@/hoc/withAuthRedirect";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../store/store";
+import { RootState } from "@/store/store";
 import { Container } from "@mui/material";
-import DataTable from "../components/DataTable";
-import Toolbar from "../components/Toolbar";
-import EmpModal from "../components/EmpModal";
-import { isLoading } from "../store/dataSlice";
-import CircularLoader from "../components/CircularLoader";
+import DataTable from "@/components/DataTable";
+import Toolbar from "@/components/Toolbar";
+import EmpModal from "@/components/EmpModal";
+import { isLoading } from "@/store/dataSlice";
+import CircularLoader from "@/components/CircularLoader";
 
 
 const Home: React.FC = () => {

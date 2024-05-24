@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { removeToken } from "../store/authSlice";
-import { isLoading, removeEmployees } from "../store/dataSlice";
+import { removeToken } from "@/store/authSlice";
+import { isLoading, removeEmployees } from "@/store/dataSlice";
 import { Button, Stack } from "@mui/material";
 
 const Toolbar = ({ setOpen }: { setOpen: (val: boolean) => void }) => {

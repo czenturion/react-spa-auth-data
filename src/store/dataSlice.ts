@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { employeeT } from "../types/types";
+import { employeeT } from "@/types/types";
 
 const initialState = {
   employees: [] as employeeT[] | null,

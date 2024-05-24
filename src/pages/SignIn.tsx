@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Container } from "@mui/material";
-import LoginModal from "../components/LoginModal";
-import LoginForm from "../components/LoginForm";
+import LoginModal from "@/components/LoginModal";
+import LoginForm from "@/components/LoginForm";
 
 
 const SignIn: React.FC = () => {

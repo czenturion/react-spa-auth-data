@@ -19,10 +19,10 @@ import {
   Typography
 } from "@mui/material";
 import { LockOutlined, Visibility, VisibilityOff } from "@mui/icons-material";
-import { AuthRequest } from "../api/auth";
-import { setToken } from "../store/authSlice";
-import { RootState } from "../store/store";
-import { LoginFormDataT } from "../types/types";
+import { AuthRequest } from "@/api/auth";
+import { setToken } from "@/store/authSlice";
+import { RootState } from "@/store/store";
+import { LoginFormDataT } from "@/types/types";
 import CircularLoader from "./CircularLoader";
 
 const LoginForm = () => {

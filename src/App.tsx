@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import { Container, CssBaseline } from "@mui/material";
 import Home from "./pages/Home";

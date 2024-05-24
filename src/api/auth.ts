@@ -1,9 +1,9 @@
 import { instance } from "./api";
-import { APIUrl } from "../shared/consts";
+import { APIUrl } from "@/shared/consts";
 import { Dispatch } from "@reduxjs/toolkit";
-import { isLoading } from "../store/dataSlice";
+import { isLoading } from "@/store/dataSlice";
 import { UseFormSetError } from "react-hook-form";
-import { authResponseDataT, LoginFormDataT } from "../types/types";
+import { authResponseDataT, LoginFormDataT } from "@/types/types";
 
 
 export const AuthAPI = {

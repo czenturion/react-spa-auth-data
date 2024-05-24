@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Box, Button, Modal, Typography } from "@mui/material";
-import { loginModalStyle } from "../shared/styles";
+import { loginModalStyle } from "@/shared/styles";
 
 
 const LoginModal = ({ openModal, setOpen }: { openModal: boolean, setOpen: (val: boolean) => void }) => {
